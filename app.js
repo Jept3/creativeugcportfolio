@@ -258,11 +258,40 @@ async function fetchPublishedProjects() {
   }));
 }
 
+// Essential contact information is embedded here as a reliable fallback.
+// A missing data/site.json must NEVER block the public Supabase gallery.
+const defaultSite = {
+  name: "Jepnte Dela Torre",
+  heroDescription: "I'm Jepnte Dela Torre. I create UGC, static ads, and social-first video content designed to stop the scroll.",
+  aboutDescription: "A good creative can make someone pause, feel something, and take action. Here's where I bring those ideas to life.",
+  email: "jepntedelatorre@gmail.com",
+  availability: "Open for creative collaborations",
+  phone: "09362512630",
+  whatsapp: "639362512630",
+  socials: { facebook: "", tiktok: "", instagram: "", youtube: "", linkedin: "" }
+};
+
+async function loadOptionalSiteSettings() {
+  // Display the portfolio even when the site settings file wasn't published.
+  // Keep supporting data/site.json for future social-profile customization.
+  try {
+    const response = await fetch("data/site.json", { cache: "no-store" });
+    if (!response.ok) {
+      console.warn(`Optional data/site.json unavailable (HTTP ${response.status}); using built-in site details.`);
+      return defaultSite;
+    }
+    const data = await response.json();
+    if (!data || typeof data !== "object" || Array.isArray(data)) return defaultSite;
+    return { ...defaultSite, ...data, socials: { ...defaultSite.socials, ...(data.socials || {}) } };
+  } catch (error) {
+    console.warn("Optional site settings could not be loaded; using built-in details.", error);
+    return defaultSite;
+  }
+}
+
 async function initialize() {
   try {
-    const siteResponse = await fetch("data/site.json");
-    if (!siteResponse.ok) throw new Error("Could not load site settings.");
-    setSite(await siteResponse.json());
+    setSite(await loadOptionalSiteSettings());
     if (connectedConfig()) {
       // On a configured site the public gallery always uses published cloud projects.
       // Do not accidentally show local DEMOs when the cloud is empty or inaccessible.
