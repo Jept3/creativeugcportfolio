@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0b18" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Jepnte Dela Torre · Portfolio Admin</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/tus-js-client@4/dist/tus.min.js"></script>
+  <script defer src="config.js"></script>
+  <script defer src="youtube.js"></script>
+  <script defer src="admin.js"></script>
+</head>
+<body>
+  <div class="site-background" aria-hidden="true"><div class="background-orb orb-a"></div><div class="background-orb orb-b"></div><div class="background-orb orb-c"></div><div class="noise-layer"></div></div>
+  <div class="admin-page">
+    <header class="admin-top glass">
+      <a class="brand" href="index.html" aria-label="View public portfolio">
+        <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-name">Jepnte Dela Torre<span class="brand-dot">.</span></span>
+      </a>
+      <div class="admin-top-right"><span class="admin-top-tag">CREATOR DASHBOARD</span><a class="admin-view" href="index.html" target="_blank" rel="noopener">View site ↗</a><button type="button" id="signOut" class="admin-sign-out" hidden>Sign out</button></div>
+    </header>
+    <main>
+      <div class="admin-heading"><div class="admin-eyebrow"><span class="pulse-dot"></span> YOUR CREATIVE COMMAND CENTER</div><h1>Make something <em>great.</em></h1><p>Upload static ad photos or publish YouTube videos. Manage everything from one place.</p></div>
+
+      <section class="admin-panel glass" id="setupPanel" hidden aria-labelledby="setupTitle">
+        <div class="panel-kicker">SETUP REQUIRED</div><h2 id="setupTitle">Connect your studio.</h2>
+        <p>Before uploads work, create your Supabase project, run <code>supabase/setup.sql</code>, add yourself as an admin, and set the public credentials in <code>config.js</code>.</p>
+        <p class="admin-subtle">Never add a Supabase secret or service_role key to this website. Setup details are in README.md.</p>
+        <a class="admin-outline-link" href="README.md">Read setup instructions ↗</a>
+      </section>
+
+      <section class="admin-panel glass login-panel" id="loginPanel" hidden aria-labelledby="loginTitle">
+        <div class="panel-kicker">SECURE ACCESS</div><h2 id="loginTitle">Welcome back.</h2><p>Sign in with your Supabase admin account.</p>
+        <form id="loginForm" class="admin-form">
+          <label class="field">Email <input name="email" type="email" autocomplete="username" required placeholder="you@studio.com" /></label>
+          <label class="field">Password <input name="password" type="password" autocomplete="current-password" required placeholder="Your password" /></label>
+          <button class="admin-primary" type="submit" id="loginButton">Sign in <span aria-hidden="true">↗</span></button>
+        </form>
+        <p class="admin-message" id="loginMessage" role="alert" aria-live="polite"></p>
+      </section>
+
+      <div id="dashboard" hidden>
+        <div class="admin-welcome"><div><p class="panel-kicker">STUDIO OVERVIEW</p><h2>Portfolio manager<span class="brand-dot">.</span></h2><p>Photos are uploaded securely; YouTube videos are added by pasting a link.</p></div><div class="admin-count glass"><strong id="adminCount">00</strong><span>LIVE PROJECTS</span></div></div>
+        <div class="admin-columns">
+          <section class="admin-panel glass upload-panel" aria-labelledby="uploadTitle">
+            <div class="panel-kicker">01 / ADD TO PORTFOLIO</div><h2 id="uploadTitle">New creative <span class="mint-asterisk">✳</span></h2>
+            <form id="uploadForm" class="admin-form">
+              <div class="source-switch" role="group" aria-label="Choose creative format">
+                <button type="button" class="source-tab is-active" data-source="image" aria-pressed="true"><span aria-hidden="true">▧</span> Upload photo</button>
+                <button type="button" class="source-tab" data-source="youtube" aria-pressed="false"><span aria-hidden="true">▶</span> YouTube video</button>
+              </div>
+              <div id="photoArea">
+                <label class="upload-zone" id="dropZone" for="mediaFile">
+                  <span class="upload-zone-icon" aria-hidden="true">＋</span><strong id="dropTitle">Choose photo to upload</strong><span class="upload-helper">Tap to browse or drop your photo here</span><span class="file-types">JPG · PNG · WEBP</span>
+                  <input id="mediaFile" name="mediaFile" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
+                </label>
+                <div class="file-preview" id="filePreview" hidden><div id="previewMedia"></div><div class="file-preview-text"><strong id="fileName"></strong><span id="fileInfo"></span></div><button type="button" id="clearFile" aria-label="Remove selected file">×</button></div>
+              </div>
+              <div id="youtubeArea" class="youtube-area" hidden>
+                <label class="field" for="youtubeUrl">YouTube video link
+                  <input id="youtubeUrl" name="youtubeUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://youtu.be/VIDEO_ID" aria-describedby="youtubeHelp" />
+                </label>
+                <p class="field-hint" id="youtubeHelp">Paste a public or unlisted YouTube link. Supports standard videos, Shorts, and youtu.be links. <a href="https://studio.youtube.com/" target="_blank" rel="noopener noreferrer">Upload your video on YouTube ↗</a></p>
+                <div class="youtube-preview" id="youtubePreview" hidden>
+                  <img id="youtubeThumb" src="assets/demo/fallback.svg" alt="YouTube video thumbnail preview" loading="lazy" />
+                  <div><span class="youtube-preview-icon">▶ VIDEO FOUND</span><strong id="youtubeFoundId"></strong><span>It will play in the portfolio without hosting the video file here.</span></div>
+                </div>
+                <div id="coverArea"><label class="field">Custom video cover <span class="optional">(optional)</span><input id="posterFile" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" /></label><p class="field-hint" id="posterInfo">Optional photo upload. Leave empty to use YouTube's thumbnail.</p></div>
+              </div>
+              <div class="form-pair"><label class="field">Project title <input id="projectTitle" name="title" maxlength="120" required placeholder="e.g. Summer product launch" /></label><label class="field">Category <select name="category" id="projectCategory" required><option value="ugc">UGC content</option><option value="static">Static ad</option><option value="video">Video ad</option></select></label></div>
+              <label class="field">Client / brand <span class="optional">(optional)</span><input name="client" maxlength="120" placeholder="e.g. Brand Name · Paid social" /></label>
+              <label class="field">Description <span class="optional">(optional)</span><textarea name="description" maxlength="1500" rows="3" placeholder="The creative concept, goals, format…"></textarea></label>
+              <p class="upload-limit" id="photoLimit"><span>◉</span> Photos up to <strong>100 MiB</strong> (Supabase Free allows at most 50 MB per file). YouTube videos have no portfolio upload-size limit.</p>
+              <div class="progress-card" id="progressCard" hidden role="group" aria-label="Upload progress">
+                <div class="progress-top"><span class="progress-caption"><span class="progress-pulse"></span><span id="uploadStage">Uploading media…</span></span><strong id="uploadPercent">0%</strong></div>
+                <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progressFill"><span class="progress-shine"></span></div></div>
+                <div class="progress-bottom"><span id="uploadBytes">0 MB / 0 MB</span><span id="uploadHint">Keep this tab open</span></div>
+              </div>
+              <p class="admin-message" id="uploadMessage" role="status" aria-live="polite"></p>
+              <div class="upload-actions"><button class="admin-primary" id="uploadButton" type="submit">Publish creative <span aria-hidden="true">↗</span></button><button class="admin-cancel" id="cancelButton" type="button" hidden>Cancel upload</button></div>
+            </form>
+          </section>
+          <section class="admin-panel glass library-panel" aria-labelledby="libraryTitle">
+            <div class="library-heading"><div><div class="panel-kicker">02 / YOUR LIBRARY</div><h2 id="libraryTitle">Published work<span class="brand-dot">.</span></h2></div><button class="admin-refresh" id="refreshButton" type="button">↻ Refresh</button></div>
+            <p class="library-helper">Manage everything currently visible on your website.</p>
+            <div class="library-items" id="libraryItems"><p class="library-empty">Loading your projects…</p></div>
+            <p class="admin-message" id="libraryMessage" role="status" aria-live="polite"></p>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="admin-footer"><span>MADE FOR CREATIVE WORK</span><span>Jepnte Dela Torre · ADMIN</span></footer>
+  </div>
+</body>
+</html>

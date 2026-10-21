@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0b18" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Jepnte Dela Torre’s creative portfolio featuring UGC, static ads, and social-first video advertising." />
+  <meta property="og:title" content="Jepnte Dela Torre — Creative Portfolio" />
+  <meta property="og:description" content="Selected creative work designed to stop the scroll." />
+  <meta property="og:type" content="website" />
+  <title>Jepnte Dela Torre · UGC / Static / Motion Portfolio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script defer src="config.js"></script>
+  <script defer src="youtube.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="site-background" aria-hidden="true">
+    <div class="background-orb orb-a"></div>
+    <div class="background-orb orb-b"></div>
+    <div class="background-orb orb-c"></div>
+    <div class="noise-layer"></div>
+  </div>
+
+  <!-- Inline, dependency-free social icons. -->
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <symbol id="social-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M15.8 8.1h2.7V4.4c-.5-.1-1.9-.2-3.5-.2-3.5 0-5.6 2.1-5.6 5.8v2.3H6v4.1h3.4V24h4.4v-7.6h3.6l.6-4.1h-4.2V10c0-1.2.3-1.9 2-1.9Z"/></symbol>
+    <symbol id="social-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16 2h-3.7v12.9a3.3 3.3 0 1 1-3.3-3.3c.4 0 .8.1 1.2.2V8.1a7 7 0 0 0-1.2-.1 6.9 6.9 0 1 0 6.9 6.9v-6a9.2 9.2 0 0 0 5.3 1.6V6.8C18.5 6.7 16.3 4.8 16 2Z"/></symbol>
+    <symbol id="social-instagram" viewBox="0 0 24 24"><rect x="2.7" y="2.7" width="18.6" height="18.6" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.8" cy="6.4" r="1.25" fill="currentColor"/></symbol>
+    <symbol id="social-youtube" viewBox="0 0 24 24"><rect x="1.8" y="4.7" width="20.4" height="14.6" rx="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 8.4 6.1 3.6-6.1 3.6Z" fill="currentColor"/></symbol>
+    <symbol id="social-linkedin" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3.1" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7.3" cy="8" r="1.5" fill="currentColor"/><path d="M5.9 11h2.9v7.1H5.9zm5.1 0h2.8v1c.5-.8 1.3-1.3 2.6-1.3 2.2 0 3.2 1.4 3.2 3.6v3.8h-2.9v-3.5c0-1.1-.3-1.7-1.3-1.7s-1.5.8-1.5 1.8v3.4H11Z" fill="currentColor"/></symbol>
+    <symbol id="social-whatsapp" viewBox="0 0 24 24"><path d="M20.3 11.7a8.35 8.35 0 0 1-12.1 7.5L3.3 20.5 4.7 16A8.35 8.35 0 1 1 20.3 11.7Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.9 7.7c-.3-.4-.6-.5-.9-.4-.7.2-1.4 1.1-1.4 2.1 0 2.2 3.8 6.3 7.1 7.6 1.2.5 2.1.1 2.8-.7.4-.5.7-1.3.4-1.5l-2.4-1.1c-.3-.2-.5-.1-.7.2l-.9 1c-.2.2-.5.2-.8.1-1.4-.6-2.8-2-3.3-3.2-.1-.3-.1-.5.1-.7l.8-.9c.2-.2.3-.5.1-.8Z" fill="currentColor"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#work">Skip to portfolio</a>
+
+  <div class="site-wrap">
+    <header class="site-header">
+      <nav class="nav glass" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Back to top">
+          <span class="brand-symbol" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="brand-name" id="brandName">Jepnte Dela Torre<span class="brand-dot">.</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+        </div>
+        <a class="nav-contact" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span><span>UGC / STATIC / MOTION</span></div>
+          <h1 id="hero-title">Creative that <span class="headline-outline">stops</span> the <span class="headline-highlight">scroll<span aria-hidden="true">✳</span></span></h1>
+          <p class="hero-description" id="heroDescription">A curated collection of thumb-stopping UGC, beautiful static ads, and motion that makes you look twice.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#work">Explore my work <span class="button-arrow" aria-hidden="true">↗</span></a>
+            <a class="button button-text" href="#about">More about me <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-bottomline"><span class="pulse-dot"></span><span id="availabilityText">Open for creative collaborations</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Preview of creative concepts">
+          <div class="hero-glow"></div>
+          <div class="hero-back-card glass" aria-hidden="true">
+            <img src="assets/demo/static-reset.svg" alt="" />
+            <span>STATIC / 02</span>
+          </div>
+          <div class="hero-main-card glass">
+            <div class="hero-card-top"><span>IN THE FRAME</span><span class="hero-card-icon" aria-hidden="true">↗</span></div>
+            <img src="assets/demo/ugc-morning.svg" alt="Sample creator-style product campaign visual" />
+            <div class="hero-card-bottom"><div><strong>CREATIVE IN MOTION</strong><span>Made to make an impression.</span></div><span class="card-play-icon" aria-hidden="true">✳</span></div>
+          </div>
+          <div class="floating-note glass"><span class="floating-symbol" aria-hidden="true">✦</span><span>Ideas meet<br/><strong>execution.</strong></span></div>
+          <div class="hero-orbit-text" aria-hidden="true">MADE TO BE SEEN —</div>
+        </div>
+      </section>
+
+      <div class="marquee-glass" aria-hidden="true">
+        <div class="marquee-content">
+          <span>STORY FIRST</span><span class="marquee-spark">✳</span><span>DESIGN ALWAYS</span><span class="marquee-spark">✳</span><span>BUILT FOR THE FEED</span><span class="marquee-spark">✳</span><span>MAKE IT MOVE</span><span class="marquee-spark">✳</span><span>STORY FIRST</span><span class="marquee-spark">✳</span><span>DESIGN ALWAYS</span><span class="marquee-spark">✳</span>
+        </div>
+      </div>
+
+      <section class="work section-space" id="work" aria-labelledby="work-title">
+        <div class="section-topline"><span>01 / THE PORTFOLIO</span><span class="topline-dash">✺</span><span>THE GOOD STUFF, ALL IN ONE PLACE</span></div>
+        <div class="section-heading-row">
+          <div><div class="section-tag">SELECTED WORK <span>✦</span></div><h2 id="work-title">The work<span class="text-glow">.</span></h2><p class="section-intro">From authentic moments to designed-to-convert creatives. Find the format you're looking for.</p></div>
+          <div class="work-aside"><span class="work-aside-number" id="projectTotal">06</span><span>CREATIVE<br />PROJECTS</span></div>
+        </div>
+        <div class="filters" aria-label="Filter projects by format">
+          <div class="filter-buttons" role="group" aria-label="Project categories">
+            <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All work <span id="count-all">06</span></button>
+            <button class="filter-button" type="button" data-filter="ugc" aria-pressed="false">UGC <span id="count-ugc">02</span></button>
+            <button class="filter-button" type="button" data-filter="static" aria-pressed="false">Static ads <span id="count-static">02</span></button>
+            <button class="filter-button" type="button" data-filter="video" aria-pressed="false">Video ads <span id="count-video">02</span></button>
+          </div>
+          <span class="results-label" id="resultsLabel" aria-live="polite">Showing all projects</span>
+        </div>
+        <div class="project-grid" id="projectGrid" aria-live="polite" aria-busy="true">
+          <div class="loading-projects glass">Loading projects…</div>
+        </div>
+        <p class="empty-state glass" id="emptyState" hidden>No projects in this category yet. Add your next piece to show it here.</p>
+      </section>
+
+      <section class="expertise section-space" id="about" aria-labelledby="about-title">
+        <div class="section-topline"><span>02 / WHAT I CREATE</span><span class="topline-dash">✺</span><span>MORE THAN A PRETTY FRAME</span></div>
+        <div class="expertise-heading"><div><div class="section-tag">THE CREATIVE TOOLKIT <span>✦</span></div><h2 id="about-title">Different formats.<br/><span class="muted-heading">One point of view.</span></h2></div><p id="aboutDescription">A good creative can make someone pause, feel something, and take action. Here's where I bring those ideas to life.</p></div>
+        <div class="expertise-grid">
+          <article class="expertise-card glass"><div class="expertise-number">01 /</div><div class="expertise-icon expertise-icon-ugc" aria-hidden="true"><span class="icon-person"></span><span class="icon-person-dot"></span></div><h3>UGC & creator content</h3><p>Real-feeling stories, product moments, hooks, and social-first creative.</p><span class="expertise-link">STORYTELLING <span aria-hidden="true">↗</span></span></article>
+          <article class="expertise-card glass"><div class="expertise-number">02 /</div><div class="expertise-icon expertise-icon-static" aria-hidden="true"><span></span><span></span></div><h3>Static ad creatives</h3><p>Bold art direction, thoughtfully designed layouts, and feed-ready assets.</p><span class="expertise-link">DESIGN <span aria-hidden="true">↗</span></span></article>
+          <article class="expertise-card glass"><div class="expertise-number">03 /</div><div class="expertise-icon expertise-icon-motion" aria-hidden="true">▶<span></span></div><h3>Video & motion ads</h3><p>Snappy edits, polished transitions, and visuals that keep things moving.</p><span class="expertise-link">MOTION <span aria-hidden="true">↗</span></span></article>
+        </div>
+      </section>
+
+      <section class="contact section-space" id="contact" aria-labelledby="contact-title">
+        <div class="contact-panel glass">
+          <div class="contact-orb" aria-hidden="true"></div>
+          <div class="contact-top"><span>03 / LET'S CONNECT</span><span class="contact-star" aria-hidden="true">✳</span></div>
+          <div class="contact-content">
+            <div><p class="contact-kicker">GOT SOMETHING IN MIND?</p><h2 id="contact-title">Let's make<br/><em>something good.</em></h2></div>
+            <div class="contact-side">
+              <p>Need new UGC, an ad refresh, or a creative partner? I'd love to hear what you're working on.</p>
+              <a class="button button-primary contact-action" href="mailto:jepntedelatorre@gmail.com" id="emailButton">Say hello <span aria-hidden="true">↗</span></a>
+              <p class="contact-hint" id="contactHint" hidden>Add your email in data/site.json to activate this button.</p>
+              <div class="contact-details" aria-label="Direct contact">
+                <a class="contact-detail" id="contactEmail" href="mailto:jepntedelatorre@gmail.com"><span class="contact-detail-label">EMAIL</span><span class="contact-detail-value">jepntedelatorre@gmail.com</span><span class="contact-detail-arrow" aria-hidden="true">↗</span></a>
+                <a class="contact-detail" id="contactPhone" href="tel:+639362512630"><span class="contact-detail-label">MOBILE</span><span class="contact-detail-value">09362512630</span><span class="contact-detail-arrow" aria-hidden="true">↗</span></a>
+              </div>
+              <div class="socials-block">
+                <p class="socials-heading">FIND ME ONLINE</p>
+                <div class="social-links" aria-label="Social media profiles">
+                  <a class="social-link is-unconfigured" data-social="facebook" aria-label="Facebook page (link not configured)" aria-disabled="true" title="Facebook page link not configured"><svg aria-hidden="true"><use href="#social-facebook"/></svg></a>
+                  <a class="social-link is-unconfigured" data-social="tiktok" aria-label="TikTok (link not configured)" aria-disabled="true" title="TikTok link not configured"><svg aria-hidden="true"><use href="#social-tiktok"/></svg></a>
+                  <a class="social-link is-unconfigured" data-social="instagram" aria-label="Instagram (link not configured)" aria-disabled="true" title="Instagram link not configured"><svg aria-hidden="true"><use href="#social-instagram"/></svg></a>
+                  <a class="social-link is-unconfigured" data-social="youtube" aria-label="YouTube (link not configured)" aria-disabled="true" title="YouTube link not configured"><svg aria-hidden="true"><use href="#social-youtube"/></svg></a>
+                  <a class="social-link is-unconfigured" data-social="linkedin" aria-label="LinkedIn (link not configured)" aria-disabled="true" title="LinkedIn link not configured"><svg aria-hidden="true"><use href="#social-linkedin"/></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="contact-footer"><span>GOOD IDEAS LOOK BETTER TOGETHER.</span><span>✦</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><div class="footer-name" id="footerName">Jepnte Dela Torre<span>.</span></div><span>CREATIVE PORTFOLIO · <span id="footerYear">2026</span></span><a href="#top">BACK TO TOP ↑</a></footer>
+  </div>
+
+  <a class="whatsapp-float" id="whatsappFloat" href="https://wa.me/639362512630" target="_blank" rel="noopener noreferrer" aria-label="Chat with Jepnte Dela Torre on WhatsApp" title="Chat on WhatsApp">
+    <svg class="whatsapp-icon" aria-hidden="true"><use href="#social-whatsapp"/></svg>
+    <span class="whatsapp-label">Let's chat</span>
+  </a>
+
+  <dialog class="project-dialog" id="projectDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-layout">
+      <div class="dialog-media" id="dialogMedia"></div>
+      <div class="dialog-details">
+        <button type="button" class="dialog-close" id="dialogClose" aria-label="Close project">×</button>
+        <span class="dialog-eyebrow" id="dialogCategory"></span>
+        <h2 id="dialogTitle"></h2>
+        <p id="dialogDescription"></p>
+        <div class="dialog-meta"><span>PROJECT TYPE</span><strong id="dialogType"></strong></div>
+        <div class="dialog-meta"><span>CLIENT / CATEGORY</span><strong id="dialogClient"></strong></div>
+        <div class="dialog-note" id="dialogNote" hidden>This is a demo placeholder. Replace it with your own image or video in the repository.</div>
+        <button class="dialog-close-text" id="dialogBack" type="button">← Back to projects</button>
+      </div>
+    </div>
+  </dialog>
+  <noscript><p class="noscript-message">JavaScript is needed to load the portfolio gallery.</p></noscript>
+</body>
+</html>
